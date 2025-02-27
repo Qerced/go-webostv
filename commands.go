@@ -87,6 +87,8 @@ const (
 	KeyEnterCommand Command = "ssap://com.webos.service.ime/sendEnterKey"
 
 	AppsListCommand Command = "ssap://com.webos.applicationManager/listApps"
+
+	GetPowerState Command = "ssap://com.webos.service.tvpower/power/getPowerState"
 )
 
 // ServiceList returns information about the available services.
