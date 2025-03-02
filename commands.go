@@ -335,8 +335,16 @@ func (tv *TV) KeyRight() error {
 	return nil
 }
 
-func (tv *TV) KeyOk() (Message, error) {
-	return tv.Command(KeyEnterCommand, nil)
+func (tv *TV) KeyOk() error {
+	if tv.input == nil {
+		var err error
+		tv.input, err = tv.createInput()
+		if err != nil {
+			return err
+		}
+	}
+	tv.input.SendButton("ENTER")
+	return nil
 }
 
 func (tv *TV) KeyBack() error {
@@ -351,6 +359,18 @@ func (tv *TV) KeyBack() error {
 	return nil
 }
 
+func (tv *TV) KeyExit() error {
+	if tv.input == nil {
+		var err error
+		tv.input, err = tv.createInput()
+		if err != nil {
+			return err
+		}
+	}
+	tv.input.SendButton("EXIT")
+	return nil
+}
+
 func (tv *TV) KeyHome() error {
 	if tv.input == nil {
 		var err error
@@ -360,5 +380,17 @@ func (tv *TV) KeyHome() error {
 		}
 	}
 	tv.input.SendButton("HOME")
+	return nil
+}
+
+func (tv *TV) KeySettings() error {
+	if tv.input == nil {
+		var err error
+		tv.input, err = tv.createInput()
+		if err != nil {
+			return err
+		}
+	}
+	tv.input.SendButton("MENU")
 	return nil
 }
